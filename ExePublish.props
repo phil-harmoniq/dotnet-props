@@ -1,0 +1,17 @@
+<Project>
+
+  <!-- https://github.com/phil-harmoniq/dotnet-props -->
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' And '$(OutputType)' == 'Exe' ">
+    <Arch>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)</Arch>
+    <RuntimeIdentifier Condition=" '$([MSBuild]::IsOSPlatform(Windows))' ">win-$(Arch.ToLower())</RuntimeIdentifier>
+    <RuntimeIdentifier Condition=" '$([MSBuild]::IsOSPlatform(Linux))' ">linux-$(Arch.ToLower())</RuntimeIdentifier>
+    <RuntimeIdentifier Condition=" '$([MSBuild]::IsOSPlatform(OSX))' ">osx-$(Arch.ToLower())</RuntimeIdentifier>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>None</DebugType>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>false</SelfContained>
+    <PublishTrimmed Condition=" '$(SelfContained)' == 'true' ">true</PublishTrimmed>
+  </PropertyGroup>
+  
+</Project>
